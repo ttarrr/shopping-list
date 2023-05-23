@@ -8,14 +8,11 @@ module.exports = {
                 test: /\.(ts|tsx)$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
-                    },
+                    loader: 'ts-loader',
                 },
             },
             {
-                test: /\.scss$/,
+                test: /\.s[ac]ss$/i,
                 use: ['style-loader', 'css-loader', 'sass-loader'],
             },
         ],
@@ -24,12 +21,13 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js'],
     },
     output: {
-        path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
+        path: path.resolve(__dirname, 'dist'),
     },
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
-        compress: true,
+        static: {
+            directory: path.join(__dirname, 'public'),
+        },
         port: 9000,
     },
 };
